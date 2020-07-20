@@ -39,6 +39,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'blog_drf.urls'
 
+# Rest framewrok settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

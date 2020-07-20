@@ -37,18 +37,22 @@ class LikedArticleListView(ListAPIView):
     serializer_class = LikedArticleSerializer
 
     def get_queryset(self):
-        return LikedArticle.objects.filter(author=self.request.user)
+        return LikedArticle.objects.filter(user=self.request.user)
 
 
 class LikeArticleView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         serialized_data = LikeArticleSerializer(data=request.data)
         if serialized_data.is_valid(raise_exception=ValueError):
-            article = get_object_or_404(Article, pk=int(serialized_data["article"]))
+            article = get_object_or_404(Article, pk=int(serialized_data["article"].value))
+            article.likes += 1
             LikedArticle.objects.create(
                 article=article,
                 user=self.request.user
             )
+            article.save()
             return Response(
                 {"message": "Liked the article"},
                 status=status.HTTP_200_OK
