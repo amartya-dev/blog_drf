@@ -13,3 +13,10 @@ Functionalities:
 - [x] Get blog posts for a user
 - [x] Like 
 - [x] Comment
+
+
+Documentation on the api:
+Visit https://localhost:8000/
+
+Browsable API:
+Visit https://localhost:8000/blog/
