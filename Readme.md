@@ -20,3 +20,9 @@ Visit https://localhost:8000/
 
 Browsable API:
 Visit https://localhost:8000/blog/
+
+## Steps to run:
+- Clone the repository 
+- Run the command: `pip install requirements.txt`
+- Run `python manage.py migrate`
+- Run `python manage.py runserver`
