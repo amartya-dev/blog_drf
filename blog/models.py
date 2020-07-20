@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.text import slugify
+from django.utils import timezone
 
 from django.contrib.auth.models import User
 
@@ -20,15 +22,26 @@ class Article(models.Model):
     slug = models.SlugField(
         max_length=250
     )
-    publish = models.DateTimeField()
+    publish = models.DateTimeField(
+        default=timezone.now
+    )
     status = models.CharField(
         max_length=10,
-        choices=STATUS_CHOICES
+        choices=STATUS_CHOICES,
+        default="draft"
     )
     top_image = models.ImageField(
         upload_to='articles/%Y/%m/%d'
     )
-    likes = models.IntegerField()
+    body = models.TextField()
+    likes = models.IntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Article, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
 
 
 class Comment(models.Model):
@@ -42,6 +55,9 @@ class Comment(models.Model):
     )
     email = models.EmailField()
     comment = models.TextField()
+
+    def __str__(self):
+        return self.article.title
 
 
 class LikedArticle(models.Model):
