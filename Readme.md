@@ -7,9 +7,9 @@ I would probably create a new repo for the
 same with a flutter frontend.
 
 Functionalities: 
-- [ ] Signup and login
-- [ ] Token Auth  for authentication and authorization / JWT
-- [ ] Create blog posts
-- [ ] Get blog posts for a user
-- [ ] Like 
-- [ ] Comment
+- [x] Signup and login
+- [x] Token Auth  for authentication and authorization / JWT
+- [x] Create blog posts
+- [x] Get blog posts for a user
+- [x] Like 
+- [x] Comment
